@@ -15,6 +15,7 @@ provider they started with.
 from __future__ import annotations
 
 import argparse
+import json
 import os
 from pathlib import Path
 import plistlib
@@ -23,20 +24,29 @@ import shutil
 import sys
 import tempfile
 
-from patch_chatgpt_providers import (
-    PatchError,
-    asar_header_hash,
-    asar_integrity_hash,
-    atomic_replace_file,
-    contains_marker,
-    ensure_provider_config,
-    invoking_user_home,
-    load_plist,
-    make_backup,
-    restore_backup,
-    run,
-    stop_target_app_processes,
-)
+try:
+    from patch_chatgpt_providers import (
+        PatchError,
+        asar_header_hash,
+        asar_integrity_hash,
+        atomic_replace_file,
+        contains_marker,
+        ensure_provider_config,
+        invoking_user_home,
+        load_plist,
+        make_backup,
+        restore_backup,
+        run,
+        stop_target_app_processes,
+    )
+except ModuleNotFoundError as exc:
+    if exc.name != "patch_chatgpt_providers":
+        raise
+    raise SystemExit(
+        "patch_chatgpt_provider_routing_26901.py must be kept in the same "
+        "directory as patch_chatgpt_providers.py. Download both files (or "
+        "clone/download the repository) and run the compatibility installer again."
+    ) from exc
 
 PATCH_MARKER = b"__codexDesktopRequestProviderRoutingBuild7658"
 ASAR_PACKAGE = "@electron/asar@3.4.1"
