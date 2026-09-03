@@ -16,6 +16,13 @@ The provider-picker UI patch no longer matches the frontend layout in build 7658
 
 ## Install
 
+This compatibility installer reuses helpers from `patch_chatgpt_providers.py`, so keep both Python files in the same directory. The simplest option is to clone/download the repository. If downloading individual files, download both:
+
+```text
+patch_chatgpt_providers.py
+patch_chatgpt_provider_routing_26901.py
+```
+
 Keep the normal project configuration in place, including `~/.codex/desktop-model-providers.json`, then run:
 
 ```bash
